@@ -7,8 +7,12 @@
 <p>This private, self-hosted application helps its operator manage authorized eBay
 seller messaging. During the current setup phase, it reads seller identity,
 conversation metadata and a limited message sample to validate API access.
-Buyer message bodies from these checks are not retained. Production automated
-replies are not enabled.</p>
+Read-only history checks do not retain buyer message bodies. During a controlled
+notification test, a bounded number of signed payloads may be encrypted temporarily
+in the local database for signature, routing and replay validation. They are purged
+after the test, or within approximately ten minutes if the test is interrupted;
+expired captures are also purged when the service restarts. Metadata hashes and
+test outcomes may be retained. Production automated replies are not enabled.</p>
 <h2>Storage and access</h2>
 <p>Seller account identifiers and encrypted OAuth refresh tokens are stored in the
 operator's local database. Temporary OAuth security cookies expire after ten
